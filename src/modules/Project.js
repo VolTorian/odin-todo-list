@@ -4,6 +4,10 @@ class Project {
         this.name = name;
         this.todoList = todoList;
     }
+
+    addTodo(todo) {
+        this.todoList.push(todo);
+    }
 }
 
 export default Project;
