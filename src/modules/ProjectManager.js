@@ -11,18 +11,14 @@ class ProjectManager {
     }
 
     addTodoToProject(projectId, title, description, dueDate, priority, isFinished = false) {
-        let projectIndex = -1;
-        for (let i = 0; i < this.projectList.length; i++) {
-            if (this.projectList[i].id === projectId) {
-                projectIndex = i;
-                break;
-            }
-        }
-        if (projectIndex === -1) {
+        let selectedProject = this.projectList.find((project) => project.id === projectId);
+
+        if (selectedProject === undefined) {
             console.log("O.o project not found wat");
             return;
         }
-        this.projectList[projectIndex].addTodo(new Todo(title, description, dueDate, priority, isFinished));
+
+        selectedProject.addTodo(new Todo(title, description, dueDate, priority, isFinished));
     }
 }
 
