@@ -8,6 +8,8 @@ class Todo {
         this.dueDate = dueDate;
         this.priority = priority;
         this.isFinished = isFinished;
+
+        console.log(`Test, todo ID: ${this.id}`);
     }
 }
 

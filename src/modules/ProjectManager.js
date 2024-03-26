@@ -22,7 +22,7 @@ class ProjectManager {
             console.log("O.o project not found wat");
             return;
         }
-        this.projectList[projectIndex].todoList.push(new Todo(title, description, dueDate, priority, isFinished));
+        this.projectList[projectIndex].addTodo(new Todo(title, description, dueDate, priority, isFinished));
     }
 }
 
