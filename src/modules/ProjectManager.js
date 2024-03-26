@@ -8,6 +8,9 @@ class ProjectManager {
 
     addProject(name, description, todoList = []) {
         this.projectList.push(new Project(name, description, todoList));
+
+        console.log("Test, newly added project:");
+        console.log(this.projectList[this.projectList.length - 1]);
     }
 
     addTodoToProject(projectId, title, description, dueDate, priority, isFinished = false) {
