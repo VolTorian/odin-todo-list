@@ -22,6 +22,9 @@ class ProjectManager {
         }
 
         selectedProject.addTodo(new Todo(title, description, dueDate, priority, isFinished));
+
+        console.log("Test, todo added to project:");
+        console.log(selectedProject.todoList);
     }
 }
 
