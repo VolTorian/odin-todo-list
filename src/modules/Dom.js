@@ -1,7 +1,9 @@
 import ProjectManager from "./ProjectManager.js";
 
+const _projectManager = new ProjectManager();
 const page = document.getElementById("page-container");
 const addProjectDialog = document.getElementById("add-project-dialog");
+addProjectDialog.addEventListener("submit", addProject);
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -22,13 +24,27 @@ function createAddProjectDialog() {
     </form>`;
 }
 
+function addProject() {
+    event.preventDefault();
+    addProjectDialog.close();
+    let name = document.getElementById("input-project-name").value;
+    let description = document.getElementById("input-project-description").value;
+    _projectManager.addProject(name, description);
+    document.getElementById("add-project-form").reset();
+}
+
+function addTodoToProject() {
+    let projectID = prompt("Enter the ID of the project you wish to add a todo to:");
+    let description = prompt("Enter a description for the todo:", "Todo description");
+    let dueDate = prompt("Enter a due date:");
+    let priority = prompt("Enter a priorit (1-5):", "3");
+    _projectManager.addTodoToProject(projectID, description, dueDate, priority);
+}
+
 function renderPage() {
     createAddProjectDialog();
     const closeAddProjectDialog = document.getElementById("cancel-add-project");
     closeAddProjectDialog.addEventListener("click", () => addProjectDialog.close());
-    addProjectDialog.addEventListener("submit", addProject);
-
-    const _projectManager = new ProjectManager();
     
     const addProjectButton = document.createElement("button");
     addProjectButton.textContent = "Add new project";
@@ -39,24 +55,6 @@ function renderPage() {
     addTodoButton.textContent = "Add todo to project";
     addTodoButton.addEventListener("click", addTodoToProject);
     page.appendChild(addTodoButton);
-    
-    function addProject() {
-        event.preventDefault();
-        addProjectDialog.close();
-        let name = document.getElementById("input-project-name").value;
-        let description = document.getElementById("input-project-description").value;
-        _projectManager.addProject(name, description);
-        document.getElementById("add-project-form").reset();
-    }
-
-    function addTodoToProject() {
-        let projectID = prompt("Enter the ID of the project you wish to add a todo to:");
-        let description = prompt("Enter a description for the todo:", "Todo description");
-        let dueDate = prompt("Enter a due date:");
-        let priority = prompt("Enter a priorit (1-5):", "3");
-        _projectManager.addTodoToProject(projectID, description, dueDate, priority);
-    }
-
 }
 
 export default renderPage;
