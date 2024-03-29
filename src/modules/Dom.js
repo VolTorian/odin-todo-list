@@ -4,6 +4,7 @@ const _projectManager = new ProjectManager();
 const page = document.getElementById("page-container");
 const addProjectDialog = document.getElementById("add-project-dialog");
 addProjectDialog.addEventListener("submit", addProject);
+const projectList = document.getElementById("project-list");
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -24,6 +25,13 @@ function createAddProjectDialog() {
     </form>`;
 }
 
+function createProjectListItem(project) {
+    const projectItem = document.createElement("li");
+    projectItem.textContent = project.name;
+
+    projectList.appendChild(projectItem);
+}
+
 function addProject() {
     event.preventDefault();
     addProjectDialog.close();
@@ -31,6 +39,8 @@ function addProject() {
     let description = document.getElementById("input-project-description").value;
     _projectManager.addProject(name, description);
     document.getElementById("add-project-form").reset();
+
+    createProjectListItem(_projectManager.projectList[_projectManager.projectList.length - 1]);
 }
 
 function addTodoToProject() {
