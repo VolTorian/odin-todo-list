@@ -6,6 +6,7 @@ const addProjectDialog = document.getElementById("add-project-dialog");
 const addTodoDialog = document.getElementById("add-todo-dialog");
 addProjectDialog.addEventListener("submit", addProject);
 const projectList = document.getElementById("project-list");
+const todoList = document.getElementById("todo-list");
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -56,8 +57,18 @@ function createAddTodoDialog() {
 function createProjectListItem(project) {
     const projectItem = document.createElement("li");
     projectItem.textContent = project.name;
+    projectItem.addEventListener("click", () => renderProjectTodos(project));
 
     projectList.appendChild(projectItem);
+}
+
+function renderProjectTodos(project) {
+    todoList.innerHTML = "";
+    project.todoList.forEach((todo) => {
+        const todoItem = document.createElement("li");
+        todoItem.textContent = `${todo.title}: ${todo.description}`
+        todoList.appendChild(todoItem);
+    })
 }
 
 function addProject() {
