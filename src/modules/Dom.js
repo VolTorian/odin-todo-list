@@ -3,6 +3,7 @@ import ProjectManager from "./ProjectManager.js";
 const _projectManager = new ProjectManager();
 const page = document.getElementById("page-container");
 const addProjectDialog = document.getElementById("add-project-dialog");
+const addTodoDialog = document.getElementById("add-todo-dialog");
 addProjectDialog.addEventListener("submit", addProject);
 const projectList = document.getElementById("project-list");
 
@@ -10,7 +11,7 @@ function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
     <form id="add-project-form">
         <div>
-            <p id="dialog-header">Create a new project</p>
+            <p>Create a new project</p>
             <div>
                 <label for="input-project-name">Name:</label>
                 <input id="input-project-name" name="input-project-name" type="text" required>
@@ -22,6 +23,33 @@ function createAddProjectDialog() {
         </div>
     <button id="submit-add-project" type="submit">Add project</button>
     <button id="cancel-add-project" type="reset">Cancel</button>
+    </form>`;
+}
+
+function createAddTodoDialog() {
+    addTodoDialog.innerHTML = `
+    <form id="add-todo-form">
+        <div>
+            <p>Add a todo</p>
+            <div>
+                <label for="input-todo-title">Title:</label>
+                <input id="input-todo-title" name="input-todo-title" type="text" required>
+            </div>
+            <div>
+                <label for="input-todo-description">Description:</label>
+                <input id="input-todo-description" name="input-todo-description" type="textarea">
+            </div>
+            <div>
+                <label for="input-todo-due">Due date:</label>
+                <input id="input-todo-due" name="input-todo-due" type="text">
+            </div>
+            <div>
+                <label for="input-todo-priority">Priority:</label>
+                <input id="input-todo-priority" name="input-todo-priority" type="text">
+            </div>
+        </div>
+    <button id="submit-add-todo" type="submit">Add project</button>
+    <button id="cancel-add-todo" type="reset">Cancel</button>
     </form>`;
 }
 
