@@ -7,6 +7,10 @@ const addTodoDialog = document.getElementById("add-todo-dialog");
 addProjectDialog.addEventListener("submit", addProject);
 const projectList = document.getElementById("project-list");
 const todoList = document.getElementById("todo-list");
+const addProjectButton = document.getElementById("add-project-button")
+addProjectButton.addEventListener("click", () => addProjectDialog.showModal());
+const addTodoButton = document.getElementById("add-todo-button");
+addTodoButton.addEventListener("click", addTodoToProject);
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -95,16 +99,6 @@ function renderPage() {
     createAddProjectDialog();
     const closeAddProjectDialog = document.getElementById("cancel-add-project");
     closeAddProjectDialog.addEventListener("click", () => addProjectDialog.close());
-    
-    const addProjectButton = document.createElement("button");
-    addProjectButton.textContent = "Add new project";
-    addProjectButton.addEventListener("click", () => document.getElementById("add-project-dialog").showModal());
-    page.appendChild(addProjectButton);
-
-    const addTodoButton = document.createElement("button");
-    addTodoButton.textContent = "Add todo to project";
-    addTodoButton.addEventListener("click", addTodoToProject);
-    page.appendChild(addTodoButton);
 }
 
 export default renderPage;
