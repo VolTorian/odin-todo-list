@@ -1,7 +1,22 @@
-h1 {
-    background-color: yellow;
+#page-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    text-align: center;
 }
 
-#test {
+dialog {
+    text-align: left;
+}
+
+#page-title {
+    grid-column: 1/3;
     background-color: cyan;
+}
+
+#sidebar {
+    background-color: lightgray;
+}
+
+#main {
+    background-color: lightyellow;
 }
