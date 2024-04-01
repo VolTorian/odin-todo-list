@@ -84,10 +84,11 @@ function addProject() {
 
 function addTodoToProject() {
     let projectID = prompt("Enter the ID of the project you wish to add a todo to:");
+    let title = prompt("Enter a title for the todo:", "Todo title");
     let description = prompt("Enter a description for the todo:", "Todo description");
     let dueDate = prompt("Enter a due date:");
     let priority = prompt("Enter a priorit (1-5):", "3");
-    _projectManager.addTodoToProject(projectID, description, dueDate, priority);
+    _projectManager.addTodoToProject(projectID, title, description, dueDate, priority);
 }
 
 function renderPage() {
