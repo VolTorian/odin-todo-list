@@ -10,7 +10,8 @@ const todoList = document.getElementById("todo-list");
 const addProjectButton = document.getElementById("add-project-button")
 addProjectButton.addEventListener("click", () => addProjectDialog.showModal());
 const addTodoButton = document.getElementById("add-todo-button");
-addTodoButton.addEventListener("click", addTodoToProject);
+// addTodoButton.addEventListener("click", addTodoToProject);
+addTodoButton.addEventListener("click", () => addTodoDialog.showModal());
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -72,7 +73,9 @@ function renderProjectTodos(project) {
         const todoItem = document.createElement("li");
         todoItem.textContent = `${todo.title}: ${todo.description}`
         todoList.appendChild(todoItem);
-    })
+    });
+
+    document.getElementById("add-todo-form").onsubmit = () => addTodoToProject(project);
 }
 
 function addProject() {
@@ -86,19 +89,26 @@ function addProject() {
     createProjectListItem(_projectManager.projectList[_projectManager.projectList.length - 1]);
 }
 
-function addTodoToProject() {
-    let projectID = prompt("Enter the ID of the project you wish to add a todo to:");
-    let title = prompt("Enter a title for the todo:", "Todo title");
-    let description = prompt("Enter a description for the todo:", "Todo description");
-    let dueDate = prompt("Enter a due date:");
-    let priority = prompt("Enter a priorit (1-5):", "3");
-    _projectManager.addTodoToProject(projectID, title, description, dueDate, priority);
+function addTodoToProject(project) {
+    event.preventDefault();
+    console.log(`Testing submitting new todo, project id: ${project.id}`);
+    addTodoDialog.close();
+
+    let title = document.getElementById("input-todo-title").value;
+    let description = document.getElementById("input-todo-description").value;
+    let dueDate = document.getElementById("input-todo-due").value;
+    let priority = document.getElementById("input-todo-priority").value;
+
+    _projectManager.addTodoToProject(project.id, title, description, dueDate, priority);
 }
 
 function renderPage() {
     createAddProjectDialog();
+    createAddTodoDialog();
     const closeAddProjectDialog = document.getElementById("cancel-add-project");
     closeAddProjectDialog.addEventListener("click", () => addProjectDialog.close());
+    const closeAddTodoDialog = document.getElementById("cancel-add-todo");
+    closeAddTodoDialog.addEventListener("click", () => addTodoDialog.close());
 }
 
 export default renderPage;
