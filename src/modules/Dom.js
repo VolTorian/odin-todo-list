@@ -4,14 +4,10 @@ const _projectManager = new ProjectManager();
 const page = document.getElementById("page-container");
 const addProjectDialog = document.getElementById("add-project-dialog");
 const addTodoDialog = document.getElementById("add-todo-dialog");
-addProjectDialog.addEventListener("submit", addProject);
 const projectList = document.getElementById("project-list");
 const todoList = document.getElementById("todo-list");
 const addProjectButton = document.getElementById("add-project-button")
-addProjectButton.addEventListener("click", () => addProjectDialog.showModal());
 const addTodoButton = document.getElementById("add-todo-button");
-// addTodoButton.addEventListener("click", addTodoToProject);
-addTodoButton.addEventListener("click", () => addTodoDialog.showModal());
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -105,9 +101,14 @@ function addTodoToProject(project) {
 function renderPage() {
     createAddProjectDialog();
     createAddTodoDialog();
+
+    addProjectDialog.addEventListener("submit", addProject);
+    addProjectButton.addEventListener("click", () => addProjectDialog.showModal());
+    addTodoButton.addEventListener("click", () => addTodoDialog.showModal());
+
     const closeAddProjectDialog = document.getElementById("cancel-add-project");
-    closeAddProjectDialog.addEventListener("click", () => addProjectDialog.close());
     const closeAddTodoDialog = document.getElementById("cancel-add-todo");
+    closeAddProjectDialog.addEventListener("click", () => addProjectDialog.close());
     closeAddTodoDialog.addEventListener("click", () => addTodoDialog.close());
 }
 
