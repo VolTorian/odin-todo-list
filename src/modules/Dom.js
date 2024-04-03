@@ -1,4 +1,5 @@
 import ProjectManager from "./ProjectManager.js";
+import deleteIcon from "../images/delete.svg";
 
 const _projectManager = new ProjectManager();
 const page = document.getElementById("page-container");
@@ -8,6 +9,9 @@ const projectList = document.getElementById("project-list");
 const todoList = document.getElementById("todo-list");
 const addProjectButton = document.getElementById("add-project-button")
 const addTodoButton = document.getElementById("add-todo-button");
+
+const deleteImage = new Image();
+deleteImage.src = deleteIcon;
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -59,6 +63,8 @@ function createProjectListItem(project) {
     const projectItem = document.createElement("li");
     projectItem.textContent = project.name;
     projectItem.addEventListener("click", () => renderProjectTodos(project));
+
+    projectItem.appendChild(deleteImage);
     
     projectList.appendChild(projectItem);
     renderProjectTodos(project);
