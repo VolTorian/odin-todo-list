@@ -95,6 +95,7 @@ function addTodoToProject(project) {
     let description = document.getElementById("input-todo-description").value;
     let dueDate = document.getElementById("input-todo-due").value;
     let priority = document.getElementById("input-todo-priority").value;
+    document.getElementById("add-todo-form").reset();
 
     _projectManager.addTodoToProject(project.id, title, description, dueDate, priority);
     renderProjectTodos(project);
