@@ -59,8 +59,9 @@ function createProjectListItem(project) {
     const projectItem = document.createElement("li");
     projectItem.textContent = project.name;
     projectItem.addEventListener("click", () => renderProjectTodos(project));
-
+    
     projectList.appendChild(projectItem);
+    renderProjectTodos(project);
 }
 
 function renderProjectTodos(project) {
@@ -96,6 +97,7 @@ function addTodoToProject(project) {
     let priority = document.getElementById("input-todo-priority").value;
 
     _projectManager.addTodoToProject(project.id, title, description, dueDate, priority);
+    renderProjectTodos(project);
 }
 
 function renderPage() {
