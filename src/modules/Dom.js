@@ -10,9 +10,6 @@ const todoList = document.getElementById("todo-list");
 const addProjectButton = document.getElementById("add-project-button")
 const addTodoButton = document.getElementById("add-todo-button");
 
-const deleteImage = new Image();
-deleteImage.src = deleteIcon;
-
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
     <form id="add-project-form">
@@ -64,6 +61,8 @@ function createProjectListItem(project) {
     projectItem.textContent = project.name;
     projectItem.addEventListener("click", () => renderProjectTodos(project));
 
+    const deleteImage = new Image();
+    deleteImage.src = deleteIcon;
     projectItem.appendChild(deleteImage);
     
     projectList.appendChild(projectItem);
