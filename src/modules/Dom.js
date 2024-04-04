@@ -63,6 +63,7 @@ function createProjectListItem(project) {
 
     const deleteImage = new Image();
     deleteImage.src = deleteIcon;
+    deleteImage.addEventListener("click", () => deleteProject(project, projectItem));
     projectItem.appendChild(deleteImage);
     
     projectList.appendChild(projectItem);
@@ -104,6 +105,11 @@ function addTodoToProject(project) {
 
     _projectManager.addTodoToProject(project.id, title, description, dueDate, priority);
     renderProjectTodos(project);
+}
+
+function deleteProject(project, projectListItem) {
+    _projectManager.deleteProject(project);
+    projectListItem.remove();
 }
 
 function renderPage() {

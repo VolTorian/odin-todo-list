@@ -26,6 +26,20 @@ class ProjectManager {
         console.log("Test, todo added to project:");
         console.log(selectedProject.todoList);
     }
+
+    deleteProject(selectedProject) {
+        let index = this.projectList.findIndex((project) => project === selectedProject);
+
+        if (index === -1) {
+            console.log("O.o project not found wat");
+            return;
+        }
+
+        this.projectList.splice(index, 1);
+
+        console.log(`Testing, the project list after removing project ${selectedProject.id}`);
+        console.log(this.projectList);
+    }
 }
 
 export default ProjectManager;
