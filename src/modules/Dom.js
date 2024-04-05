@@ -75,6 +75,7 @@ function createProjectListItem(project) {
 
 function renderProjectTodos(project) {
     todoList.innerHTML = "";
+    addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
         const todoItem = document.createElement("li");
         todoItem.textContent = `${todo.title}: ${todo.description}`
@@ -111,8 +112,12 @@ function addTodoToProject(project) {
 }
 
 function deleteProject(project, projectListItem) {
+    event.stopPropagation();
     _projectManager.deleteProject(project);
     projectListItem.remove();
+
+    todoList.innerHTML = "";
+    addTodoButton.style.visibility = "hidden";
 }
 
 function renderPage() {
@@ -127,6 +132,8 @@ function renderPage() {
     const closeAddTodoDialog = document.getElementById("cancel-add-todo");
     closeAddProjectDialog.addEventListener("click", () => addProjectDialog.close());
     closeAddTodoDialog.addEventListener("click", () => addTodoDialog.close());
+
+    addTodoButton.style.visibility = "hidden";
 }
 
 export default renderPage;
