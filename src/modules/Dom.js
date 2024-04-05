@@ -58,8 +58,11 @@ function createAddTodoDialog() {
 
 function createProjectListItem(project) {
     const projectItem = document.createElement("li");
-    projectItem.textContent = project.name;
     projectItem.addEventListener("click", () => renderProjectTodos(project));
+
+    const projectItemName = document.createElement("span");
+    projectItemName.textContent = project.name;
+    projectItem.appendChild(projectItemName);
 
     const deleteImage = new Image();
     deleteImage.src = deleteIcon;
