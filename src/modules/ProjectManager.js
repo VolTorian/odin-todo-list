@@ -40,6 +40,11 @@ class ProjectManager {
         console.log(`Testing, the project list after removing project ${selectedProject.id}`);
         console.log(this.projectList);
     }
+
+    deleteTodo(selectedProject, selectedTodo) {
+        //find selected project in project array
+        //find and remove selected todo in todo array of selected project
+    }
 }
 
 export default ProjectManager;

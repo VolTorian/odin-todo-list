@@ -78,7 +78,15 @@ function renderProjectTodos(project) {
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
         const todoItem = document.createElement("li");
-        todoItem.textContent = `${todo.title}: ${todo.description}`
+        const todoText = document.createElement("span");
+        todoText.textContent = `${todo.title}: ${todo.description} | Due: ${todo.dueDate} | Priority: ${todo.priority}`;
+        todoItem.appendChild(todoText);
+
+        const deleteImage = new Image();
+        deleteImage.src = deleteIcon;
+        deleteImage.addEventListener("click", () => deleteTodo(project, todo, todoItem));
+        todoItem.appendChild(deleteImage);
+
         todoList.appendChild(todoItem);
     });
 
@@ -118,6 +126,11 @@ function deleteProject(project, projectListItem) {
 
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "hidden";
+}
+
+function deleteTodo(project, todo, todoListItem) {
+    _projectManager.deleteTodo(project, todo);
+    todoListItem.remove();
 }
 
 function renderPage() {
