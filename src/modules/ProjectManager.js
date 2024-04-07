@@ -42,8 +42,14 @@ class ProjectManager {
     }
 
     deleteTodo(selectedProject, selectedTodo) {
-        //find selected project in project array
-        //find and remove selected todo in todo array of selected project
+        let todoIndex = selectedProject.todoList.findIndex((todo) => todo === selectedTodo);
+
+        if (index === -1) {
+            console.log("O.o todo not found wat");
+            return;
+        }
+
+        selectedProject.todoList.splice(todoIndex, 1);
     }
 }
 
