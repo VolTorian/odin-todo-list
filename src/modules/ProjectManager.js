@@ -51,6 +51,10 @@ class ProjectManager {
 
         selectedProject.todoList.splice(todoIndex, 1);
     }
+
+    editTodo(selectedProject, selectedTodo) {
+
+    }
 }
 
 export default ProjectManager;

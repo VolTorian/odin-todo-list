@@ -6,6 +6,7 @@ const _projectManager = new ProjectManager();
 const page = document.getElementById("page-container");
 const addProjectDialog = document.getElementById("add-project-dialog");
 const addTodoDialog = document.getElementById("add-todo-dialog");
+const editTodoDialog = document.getElementById("edit-todo-dialog");
 const projectList = document.getElementById("project-list");
 const todoList = document.getElementById("todo-list");
 const addProjectButton = document.getElementById("add-project-button")
@@ -52,8 +53,35 @@ function createAddTodoDialog() {
                 <input id="input-todo-priority" name="input-todo-priority" type="number" min="1" max="5" value="3">
             </div>
         </div>
-    <button id="submit-add-todo" type="submit">Add project</button>
+    <button id="submit-add-todo" type="submit">Add todo</button>
     <button id="cancel-add-todo" type="reset">Cancel</button>
+    </form>`;
+}
+
+function createEditTodoDialog() {
+    editTodoDialog.innerHTML = `
+    <form id="edit-todo-form">
+        <div>
+            <p>Edit a todo</p>
+            <div>
+                <label for="edit-todo-title">Title:</label>
+                <input id="edit-todo-title" name="edit-todo-title" type="text" required>
+            </div>
+            <div>
+                <label for="edit-todo-description">Description:</label>
+                <input id="edit-todo-description" name="edit-todo-description" type="textarea">
+            </div>
+            <div>
+                <label for="edit-todo-due">Due date:</label>
+                <input id="edit-todo-due" name="edit-todo-due" type="date">
+            </div>
+            <div>
+                <label for="edit-todo-priority">Priority (1-5):</label>
+                <input id="edit-todo-priority" name="edit-todo-priority" type="number" min="1" max="5">
+            </div>
+        </div>
+    <button id="submit-edit-todo" type="submit">Edit todo</button>
+    <button id="cancel-edit-todo" type="reset">Cancel</button>
     </form>`;
 }
 
@@ -79,7 +107,7 @@ function renderProjectTodos(project) {
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
         const todoItem = document.createElement("li");
-        const todoText = document.createElement("span");;
+        const todoText = document.createElement("span");
         const dateSplit = todo.dueDate.split("-");
         todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
                                 | Priority: ${todo.priority}`;
@@ -89,6 +117,8 @@ function renderProjectTodos(project) {
         deleteImage.src = deleteIcon;
         deleteImage.addEventListener("click", () => deleteTodo(project, todo, todoItem));
         todoItem.appendChild(deleteImage);
+
+        todoItem.addEventListener("click", () => fillEditForm(project, todo));
 
         todoList.appendChild(todoItem);
     });
@@ -132,13 +162,29 @@ function deleteProject(project, projectListItem) {
 }
 
 function deleteTodo(project, todo, todoListItem) {
+    event.stopPropagation();
     _projectManager.deleteTodo(project, todo);
     todoListItem.remove();
+}
+
+function editTodo(project, todo, todoListItem) {
+}
+
+function fillEditForm(project, todo, todoListItem) {
+    document.getElementById("edit-todo-title").value = todo.title;
+    document.getElementById("edit-todo-description").value = todo.description;
+    document.getElementById("edit-todo-due").value = todo.dueDate;
+    document.getElementById("edit-todo-priority").value = todo.priority;
+
+    document.getElementById("edit-todo-form").onsubmit = () => editTodo(project, todo, todoListItem);
+    
+    editTodoDialog.showModal();
 }
 
 function renderPage() {
     createAddProjectDialog();
     createAddTodoDialog();
+    createEditTodoDialog();
 
     addProjectDialog.addEventListener("submit", addProject);
     addProjectButton.addEventListener("click", () => addProjectDialog.showModal());
@@ -146,8 +192,10 @@ function renderPage() {
 
     const closeAddProjectDialog = document.getElementById("cancel-add-project");
     const closeAddTodoDialog = document.getElementById("cancel-add-todo");
+    const closeEditTodoDialog = document.getElementById("cancel-edit-todo");
     closeAddProjectDialog.addEventListener("click", () => addProjectDialog.close());
     closeAddTodoDialog.addEventListener("click", () => addTodoDialog.close());
+    closeEditTodoDialog.addEventListener("click", () => editTodoDialog.close());
 
     addTodoButton.style.visibility = "hidden";
 }
