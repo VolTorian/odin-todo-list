@@ -1,5 +1,6 @@
 import ProjectManager from "./ProjectManager.js";
 import deleteIcon from "../images/delete.svg";
+import {format} from "date-fns";
 
 const _projectManager = new ProjectManager();
 const page = document.getElementById("page-container");
@@ -78,8 +79,10 @@ function renderProjectTodos(project) {
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
         const todoItem = document.createElement("li");
-        const todoText = document.createElement("span");
-        todoText.textContent = `${todo.title}: ${todo.description} | Due: ${todo.dueDate} | Priority: ${todo.priority}`;
+        const todoText = document.createElement("span");;
+        const dateSplit = todo.dueDate.split("-");
+        todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
+                                | Priority: ${todo.priority}`;
         todoItem.appendChild(todoText);
 
         const deleteImage = new Image();
