@@ -52,8 +52,11 @@ class ProjectManager {
         selectedProject.todoList.splice(todoIndex, 1);
     }
 
-    editTodo(selectedProject, selectedTodo) {
-
+    editTodo(selectedTodo, title, description, dueDate, priority) {
+        selectedTodo.title = title;
+        selectedTodo.description = description;
+        selectedTodo.dueDate = dueDate;
+        selectedTodo.priority = priority;
     }
 }
 

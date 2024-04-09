@@ -118,7 +118,7 @@ function renderProjectTodos(project) {
         deleteImage.addEventListener("click", () => deleteTodo(project, todo, todoItem));
         todoItem.appendChild(deleteImage);
 
-        todoItem.addEventListener("click", () => fillEditForm(project, todo));
+        todoItem.addEventListener("click", () => fillEditForm(todo, todoText));
 
         todoList.appendChild(todoItem);
     });
@@ -167,16 +167,28 @@ function deleteTodo(project, todo, todoListItem) {
     todoListItem.remove();
 }
 
-function editTodo(project, todo, todoListItem) {
+function editTodo(todo, todoText) {
+    event.preventDefault();
+    editTodoDialog.close();
+    let title = document.getElementById("edit-todo-title").value;
+    let description = document.getElementById("edit-todo-description").value;
+    let dueDate = document.getElementById("edit-todo-due").value;
+    let priority = document.getElementById("edit-todo-priority").value;
+
+    _projectManager.editTodo(todo, title, description, dueDate, priority);
+
+    const dateSplit = todo.dueDate.split("-");
+    todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
+                                | Priority: ${todo.priority}`;
 }
 
-function fillEditForm(project, todo, todoListItem) {
+function fillEditForm(todo, todoText) {
     document.getElementById("edit-todo-title").value = todo.title;
     document.getElementById("edit-todo-description").value = todo.description;
     document.getElementById("edit-todo-due").value = todo.dueDate;
     document.getElementById("edit-todo-priority").value = todo.priority;
 
-    document.getElementById("edit-todo-form").onsubmit = () => editTodo(project, todo, todoListItem);
+    document.getElementById("edit-todo-form").onsubmit = () => editTodo(todo, todoText);
     
     editTodoDialog.showModal();
 }
