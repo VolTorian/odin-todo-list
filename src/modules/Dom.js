@@ -44,11 +44,11 @@ function createAddTodoDialog() {
             </div>
             <div>
                 <label for="input-todo-due">Due date:</label>
-                <input id="input-todo-due" name="input-todo-due" type="text">
+                <input id="input-todo-due" name="input-todo-due" type="date">
             </div>
             <div>
-                <label for="input-todo-priority">Priority:</label>
-                <input id="input-todo-priority" name="input-todo-priority" type="text">
+                <label for="input-todo-priority">Priority (1-5):</label>
+                <input id="input-todo-priority" name="input-todo-priority" type="number" min="1" max="5" value="3">
             </div>
         </div>
     <button id="submit-add-todo" type="submit">Add project</button>
