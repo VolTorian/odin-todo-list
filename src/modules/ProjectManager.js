@@ -33,7 +33,7 @@ class ProjectManager {
             return;
         }
 
-        selectedProject.addTodo(new Todo(title, description, dueDate, priority, isFinished));
+        selectedProject.todoList.push(new Todo(title, description, dueDate, priority, isFinished))
 
         console.log("Test, todo added to project:");
         console.log(selectedProject.todoList);
