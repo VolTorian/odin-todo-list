@@ -102,6 +102,10 @@ function createProjectListItem(project) {
     renderProjectTodos(project);
 }
 
+function renderInitialProjectList() {
+    _projectManager.projectList.forEach((project) => createProjectListItem(project));
+}
+
 function renderProjectTodos(project) {
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "visible";
@@ -197,6 +201,7 @@ function renderPage() {
     createAddProjectDialog();
     createAddTodoDialog();
     createEditTodoDialog();
+    renderInitialProjectList();
 
     addProjectDialog.addEventListener("submit", addProject);
     addProjectButton.addEventListener("click", () => addProjectDialog.showModal());

@@ -4,10 +4,22 @@ import Todo from './Todo.js';
 class ProjectManager {
     constructor() {
         this.projectList = [];
+
+        if (localStorage.getItem(this.localStorageKey)) {
+            this.projectList = JSON.parse(localStorage.getItem(this.localStorageKey));
+
+            console.log("retrieved from local storage");
+        }
+    }
+
+    get localStorageKey() {
+        return "todo list key";
     }
 
     addProject(name, description, todoList = []) {
         this.projectList.push(new Project(name, description, todoList));
+
+        localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
 
         console.log("Test, newly added project:");
         console.log(this.projectList[this.projectList.length - 1]);
