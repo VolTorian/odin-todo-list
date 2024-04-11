@@ -60,7 +60,7 @@ class ProjectManager {
     deleteTodo(selectedProject, selectedTodo) {
         let todoIndex = selectedProject.todoList.findIndex((todo) => todo === selectedTodo);
 
-        if (index === -1) {
+        if (todoIndex === -1) {
             console.log("O.o todo not found wat");
             return;
         }
