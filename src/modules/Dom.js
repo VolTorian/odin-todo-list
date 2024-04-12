@@ -11,6 +11,7 @@ const projectList = document.getElementById("project-list");
 const todoList = document.getElementById("todo-list");
 const addProjectButton = document.getElementById("add-project-button")
 const addTodoButton = document.getElementById("add-todo-button");
+const projectTitle = document.getElementById("project-title");
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -107,6 +108,7 @@ function renderInitialProjectList() {
 }
 
 function renderProjectTodos(project) {
+    projectTitle.textContent = project.name;
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
@@ -163,6 +165,7 @@ function deleteProject(project, projectListItem) {
 
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "hidden";
+    projectTitle.textContent = "";
 }
 
 function deleteTodo(project, todo, todoListItem) {
