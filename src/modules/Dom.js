@@ -100,7 +100,6 @@ function createProjectListItem(project) {
     projectItem.appendChild(deleteImage);
     
     projectList.appendChild(projectItem);
-    renderProjectTodos(project);
 }
 
 function renderInitialProjectList() {
@@ -140,7 +139,9 @@ function addProject() {
     _projectManager.addProject(name, description);
     document.getElementById("add-project-form").reset();
 
-    createProjectListItem(_projectManager.projectList[_projectManager.projectList.length - 1]);
+    let newProject = _projectManager.projectList[_projectManager.projectList.length - 1];
+    createProjectListItem(newProject);
+    renderProjectTodos(newProject);
 }
 
 function addTodoToProject(project) {
@@ -163,7 +164,7 @@ function deleteProject(project, projectListItem) {
     _projectManager.deleteProject(project);
     projectListItem.remove();
 
-    todoList.innerHTML = "";
+    todoList.innerHTML = "Select a project on the left to get started";
     addTodoButton.style.visibility = "hidden";
     projectTitle.textContent = "";
 }
@@ -218,6 +219,7 @@ function renderPage() {
     closeEditTodoDialog.addEventListener("click", () => editTodoDialog.close());
 
     addTodoButton.style.visibility = "hidden";
+    todoList.innerHTML = "Select a project on the left to get started";
 }
 
 export default renderPage;
