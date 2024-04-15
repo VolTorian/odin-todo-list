@@ -47,7 +47,7 @@ function createAddTodoDialog() {
             </div>
             <div>
                 <label for="input-todo-due">Due date:</label>
-                <input id="input-todo-due" name="input-todo-due" type="date">
+                <input id="input-todo-due" name="input-todo-due" type="date" required>
             </div>
             <div>
                 <label for="input-todo-priority">Priority (1-5):</label>
@@ -74,7 +74,7 @@ function createEditTodoDialog() {
             </div>
             <div>
                 <label for="edit-todo-due">Due date:</label>
-                <input id="edit-todo-due" name="edit-todo-due" type="date">
+                <input id="edit-todo-due" name="edit-todo-due" type="date" required>
             </div>
             <div>
                 <label for="edit-todo-priority">Priority (1-5):</label>
