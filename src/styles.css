@@ -41,8 +41,13 @@ li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: solid transparent 3px;
 }
 
 li > span {
-    padding: 0 auto;
+    padding-left: .5rem;
+}
+
+li:hover {
+    border: solid gray 3px;
 }
