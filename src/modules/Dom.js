@@ -116,10 +116,13 @@ function renderProjectTodos(project) {
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
         const todoItem = document.createElement("li");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
         const todoText = document.createElement("span");
         const dateSplit = todo.dueDate.split("-");
         todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
                                 | Priority: ${todo.priority}`;
+        todoItem.appendChild(checkbox);
         todoItem.appendChild(todoText);
 
         const deleteImage = new Image();
