@@ -51,3 +51,7 @@ li > span {
 li:hover {
     border: solid gray 3px;
 }
+
+.selected {
+    background-color: whitesmoke;
+}

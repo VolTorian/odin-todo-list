@@ -88,7 +88,11 @@ function createEditTodoDialog() {
 
 function createProjectListItem(project) {
     const projectItem = document.createElement("li");
-    projectItem.addEventListener("click", () => renderProjectTodos(project));
+    highlightSelected(projectItem);
+    projectItem.addEventListener("click", () => {
+        renderProjectTodos(project)
+        highlightSelected(projectItem);
+    });
 
     const projectItemName = document.createElement("span");
     projectItemName.textContent = project.name;
@@ -201,6 +205,15 @@ function fillEditForm(todo, todoText) {
     editTodoDialog.showModal();
 }
 
+function highlightSelected(selected) {
+    const projectListItems = document.querySelectorAll("#project-list li");
+    projectListItems.forEach((item) => {
+        item.classList.remove("selected");
+    })
+
+    selected.classList.add("selected");
+}
+
 function renderPage() {
     createAddProjectDialog();
     createAddTodoDialog();
@@ -220,6 +233,11 @@ function renderPage() {
 
     addTodoButton.style.visibility = "hidden";
     todoList.innerHTML = "Select a project on the left to get started";
+
+    const projectListItems = document.querySelectorAll("#project-list li");
+    projectListItems.forEach((item) => {
+        item.classList.remove("selected");
+    })
 }
 
 export default renderPage;
