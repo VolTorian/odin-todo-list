@@ -78,6 +78,12 @@ class ProjectManager {
 
         localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
     }
+
+    toggleTodoFinished(selectedTodo, isFinished) {
+        selectedTodo.isFinished = isFinished;
+
+        localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
+    }
 }
 
 export default ProjectManager;

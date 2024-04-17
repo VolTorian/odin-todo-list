@@ -118,6 +118,8 @@ function renderProjectTodos(project) {
         const todoItem = document.createElement("li");
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        checkbox.addEventListener("click", () => toggleTodoFinished(todo));
+        checkbox.checked = todo.isFinished;
         const todoText = document.createElement("span");
         const dateSplit = todo.dueDate.split("-");
         todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
@@ -215,6 +217,11 @@ function highlightSelected(selected) {
     })
 
     selected.classList.add("selected");
+}
+
+function toggleTodoFinished(todo) {
+    event.stopPropagation();
+    _projectManager.toggleTodoFinished(todo, event.target.checked);
 }
 
 function renderPage() {
