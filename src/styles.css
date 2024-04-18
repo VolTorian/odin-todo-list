@@ -56,3 +56,12 @@ li:hover {
 .selected {
     background-color: whitesmoke;
 }
+
+li > img {
+    /* https://codepen.io/sosuke/pen/Pjoqqp */
+    filter: invert(67%) sepia(4%) saturate(19%) hue-rotate(6deg) brightness(97%) contrast(82%);
+}
+
+li > img:hover {
+    filter: none;
+}
