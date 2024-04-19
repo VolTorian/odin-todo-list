@@ -124,6 +124,9 @@ function renderProjectTodos(project) {
         const dateSplit = todo.dueDate.split("-");
         todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
                                 | Priority: ${todo.priority}`;
+        if (todo.isFinished) {
+            todoText.classList.add("finished");
+        }
         todoItem.appendChild(checkbox);
         todoItem.appendChild(todoText);
 
@@ -222,6 +225,13 @@ function highlightSelected(selected) {
 function toggleTodoFinished(todo) {
     event.stopPropagation();
     _projectManager.toggleTodoFinished(todo, event.target.checked);
+
+    if (todo.isFinished) {
+        event.target.nextSibling.classList.add("finished");
+    }
+    else {
+        event.target.nextSibling.classList.remove("finished");
+    }
 }
 
 function renderPage() {

@@ -65,3 +65,8 @@ li > img {
 li > img:hover {
     filter: none;
 }
+
+.finished {
+    text-decoration: line-through;
+    color: gray;
+}
