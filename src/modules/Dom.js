@@ -1,6 +1,6 @@
 import ProjectManager from "./ProjectManager.js";
 import deleteIcon from "../images/delete.svg";
-import {format} from "date-fns";
+import {format, differenceInCalendarDays} from "date-fns";
 
 const _projectManager = new ProjectManager();
 const page = document.getElementById("page-container");
@@ -125,8 +125,9 @@ function renderProjectTodos(project) {
         todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
                                 | Priority: ${todo.priority}`;
         if (todo.isFinished) {
-            todoText.classList.add("finished");
+            todoItem.classList.add("finished");
         }
+        highlightUrgency(todo, todoItem);
         todoItem.appendChild(checkbox);
         todoItem.appendChild(todoText);
 
@@ -227,10 +228,16 @@ function toggleTodoFinished(todo) {
     _projectManager.toggleTodoFinished(todo, event.target.checked);
 
     if (todo.isFinished) {
-        event.target.nextSibling.classList.add("finished");
+        event.target.parentNode.classList.add("finished");
     }
     else {
-        event.target.nextSibling.classList.remove("finished");
+        event.target.parentNode.classList.remove("finished");
+    }
+}
+
+function highlightUrgency(todo, container) {
+    if (differenceInCalendarDays(todo.dueDate, new Date() + 1) <= 7) {
+        container.classList.add("urgent");
     }
 }
 
