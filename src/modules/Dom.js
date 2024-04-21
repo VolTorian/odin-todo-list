@@ -201,6 +201,8 @@ function editTodo(todo, todoText) {
     const dateSplit = todo.dueDate.split("-");
     todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
                                 | Priority: ${todo.priority}`;
+
+    highlightUrgency(todo, todoText.parentNode);
 }
 
 function fillEditForm(todo, todoText) {
@@ -236,8 +238,11 @@ function toggleTodoFinished(todo) {
 }
 
 function highlightUrgency(todo, container) {
-    if (differenceInCalendarDays(todo.dueDate, new Date() + 1) <= 7) {
+    if (differenceInCalendarDays(todo.dueDate, new Date()) + 1 <= 7) {
         container.classList.add("urgent");
+    }
+    else {
+        container.classList.remove("urgent");
     }
 }
 
