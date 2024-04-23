@@ -238,11 +238,20 @@ function toggleTodoFinished(todo) {
 }
 
 function highlightUrgency(todo, container) {
-    if (differenceInCalendarDays(todo.dueDate, new Date()) + 1 <= 7) {
+    let difference = differenceInCalendarDays(todo.dueDate, new Date()) + 1;
+    if (difference <= 0) {
+        container.classList.add("due");
+    }
+    else if (difference <= 7) {
         container.classList.add("urgent");
     }
+    else if (difference <= 14) {
+        container.classList.add("upcoming");
+    }
     else {
+        container.classList.remove("due");
         container.classList.remove("urgent");
+        container.classList.remove("upcoming");
     }
 }
 

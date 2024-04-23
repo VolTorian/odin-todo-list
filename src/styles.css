@@ -66,8 +66,16 @@ li > img:hover {
     filter: none;
 }
 
-.urgent {
+.due {
     background-color: red;
+}
+
+.urgent {
+    background-color: yellow;
+}
+
+.upcoming {
+    background-color: lightgreen;
 }
 
 .finished {
