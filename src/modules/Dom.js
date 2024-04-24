@@ -115,33 +115,61 @@ function renderProjectTodos(project) {
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
-        const todoItem = document.createElement("li");
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.addEventListener("click", () => toggleTodoFinished(todo));
-        checkbox.checked = todo.isFinished;
-        const todoText = document.createElement("span");
-        const dateSplit = todo.dueDate.split("-");
-        todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
-                                | Priority: ${todo.priority}`;
-        if (todo.isFinished) {
-            todoItem.classList.add("finished");
-        }
-        highlightUrgency(todo, todoItem);
-        todoItem.appendChild(checkbox);
-        todoItem.appendChild(todoText);
+        // const todoItem = document.createElement("li");
+        // const checkbox = document.createElement("input");
+        // checkbox.type = "checkbox";
+        // checkbox.addEventListener("click", () => toggleTodoFinished(todo));
+        // checkbox.checked = todo.isFinished;
+        // const todoText = document.createElement("span");
+        // const dateSplit = todo.dueDate.split("-");
+        // todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
+        //                         | Priority: ${todo.priority}`;
+        // if (todo.isFinished) {
+        //     todoItem.classList.add("finished");
+        // }
+        // highlightUrgency(todo, todoItem);
+        // todoItem.appendChild(checkbox);
+        // todoItem.appendChild(todoText);
 
-        const deleteImage = new Image();
-        deleteImage.src = deleteIcon;
-        deleteImage.addEventListener("click", () => deleteTodo(project, todo, todoItem));
-        todoItem.appendChild(deleteImage);
+        // const deleteImage = new Image();
+        // deleteImage.src = deleteIcon;
+        // deleteImage.addEventListener("click", () => deleteTodo(project, todo, todoItem));
+        // todoItem.appendChild(deleteImage);
 
-        todoItem.addEventListener("click", () => fillEditForm(todo, todoText));
+        // todoItem.addEventListener("click", () => fillEditForm(todo, todoText));
 
-        todoList.appendChild(todoItem);
+        todoList.appendChild(buildTodoItem(project, todo));
     });
 
     document.getElementById("add-todo-form").onsubmit = () => addTodoToProject(project);
+}
+
+function buildTodoItem(project, todo) {
+    const todoItem = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.addEventListener("click", () => toggleTodoFinished(todo));
+    checkbox.checked = todo.isFinished;
+    
+    const todoTitle = document.createElement("div");
+    todoTitle.textContent = todo.title;
+    const todoDescription = document.createElement("div");
+    todoDescription.textContent = todo.description;
+    const todoDueDate = document.createElement("div");
+    let dateSplit = todo.dueDate.split("-");
+    todoDueDate.textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`;
+    const todoPriority = document.createElement("div");
+    todoPriority.textContent = `Priority: ${todo.priority}`;
+
+    const deleteImage = new Image();
+    deleteImage.src = deleteIcon;
+    deleteImage.addEventListener("click", () => deleteTodo(project, todo, todoItem));
+
+    todoItem.append(checkbox, todoTitle, todoDescription, todoDueDate, todoPriority, deleteImage);
+    console.log("finished renderTodoItem");
+
+    return todoItem;
 }
 
 function addProject() {

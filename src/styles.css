@@ -66,6 +66,11 @@ li > img:hover {
     filter: none;
 }
 
+.todo-list {
+    display: grid;
+    grid-template-columns: min-content 1fr 2fr 1fr 1fr min-content;
+}
+
 .due {
     background-color: red;
 }
