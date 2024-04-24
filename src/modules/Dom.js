@@ -111,7 +111,7 @@ function renderInitialProjectList() {
 }
 
 function renderProjectTodos(project) {
-    projectTitle.textContent = project.name;
+    projectTitle.textContent = `${project.name}: ${project.description}`;
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
