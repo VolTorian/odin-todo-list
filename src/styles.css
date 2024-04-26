@@ -38,10 +38,25 @@ ul {
 }
 
 li {
+    border: solid transparent 3px;
+}
+
+#project-list > li {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: solid transparent 3px;
+}
+
+#todo-list > li {
+    display: grid;
+    grid-template-columns: min-content minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) min-content;
+    text-align: left;
+    align-items: center;
+    gap: .5rem;
+}
+
+#todo-list > li > div {
+    word-wrap: break-word;
 }
 
 li > span {
@@ -64,11 +79,6 @@ li > img {
 
 li > img:hover {
     filter: none;
-}
-
-.todo-list {
-    display: grid;
-    grid-template-columns: min-content 1fr 2fr 1fr 1fr min-content;
 }
 
 .due {
