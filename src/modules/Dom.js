@@ -115,6 +115,7 @@ function renderProjectTodos(project) {
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
+        const todoItem = buildTodoItem(project, todo);
         // const todoItem = document.createElement("li");
         // const checkbox = document.createElement("input");
         // checkbox.type = "checkbox";
@@ -127,7 +128,7 @@ function renderProjectTodos(project) {
         // if (todo.isFinished) {
         //     todoItem.classList.add("finished");
         // }
-        // highlightUrgency(todo, todoItem);
+        highlightUrgency(todo, todoItem);
         // todoItem.appendChild(checkbox);
         // todoItem.appendChild(todoText);
 
@@ -138,7 +139,7 @@ function renderProjectTodos(project) {
 
         // todoItem.addEventListener("click", () => fillEditForm(todo, todoText));
 
-        todoList.appendChild(buildTodoItem(project, todo));
+        todoList.appendChild(todoItem);
     });
 
     document.getElementById("add-todo-form").onsubmit = () => addTodoToProject(project);
