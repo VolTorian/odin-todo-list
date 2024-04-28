@@ -126,9 +126,9 @@ function renderProjectTodos(project) {
         // const dateSplit = todo.dueDate.split("-");
         // todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
         //                         | Priority: ${todo.priority}`;
-        // if (todo.isFinished) {
-        //     todoItem.classList.add("finished");
-        // }
+        if (todo.isFinished) {
+            todoItem.classList.add("finished");
+        }
         highlightUrgency(todo, todoItem);
         // todoItem.appendChild(checkbox);
         // todoItem.appendChild(todoText);
