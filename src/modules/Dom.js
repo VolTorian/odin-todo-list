@@ -120,7 +120,7 @@ function renderProjectTodos(project) {
         // const checkbox = document.createElement("input");
         // checkbox.type = "checkbox";
         // checkbox.addEventListener("click", () => toggleTodoFinished(todo));
-        todoItem.firstChild.addEventListener("click", () => toggleTodoFinished(todo));
+        // todoItem.firstChild.addEventListener("click", () => toggleTodoFinished(todo));
         // checkbox.checked = todo.isFinished;
         // const todoText = document.createElement("span");
         // const dateSplit = todo.dueDate.split("-");
