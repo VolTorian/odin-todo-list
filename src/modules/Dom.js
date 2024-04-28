@@ -116,30 +116,10 @@ function renderProjectTodos(project) {
     addTodoButton.style.visibility = "visible";
     project.todoList.forEach((todo) => {
         const todoItem = buildTodoItem(project, todo);
-        // const todoItem = document.createElement("li");
-        // const checkbox = document.createElement("input");
-        // checkbox.type = "checkbox";
-        // checkbox.addEventListener("click", () => toggleTodoFinished(todo));
-        // todoItem.firstChild.addEventListener("click", () => toggleTodoFinished(todo));
-        // checkbox.checked = todo.isFinished;
-        // const todoText = document.createElement("span");
-        // const dateSplit = todo.dueDate.split("-");
-        // todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
-        //                         | Priority: ${todo.priority}`;
         if (todo.isFinished) {
             todoItem.classList.add("finished");
         }
         highlightUrgency(todo, todoItem);
-        // todoItem.appendChild(checkbox);
-        // todoItem.appendChild(todoText);
-
-        // const deleteImage = new Image();
-        // deleteImage.src = deleteIcon;
-        // deleteImage.addEventListener("click", () => deleteTodo(project, todo, todoItem));
-        // todoItem.appendChild(deleteImage);
-
-        // todoItem.addEventListener("click", () => fillEditForm(todo, todoText));
-
         todoList.appendChild(todoItem);
     });
 
@@ -173,8 +153,6 @@ function buildTodoItem(project, todo) {
     deleteImage.addEventListener("click", () => deleteTodo(project, todo, todoItem));
 
     todoItem.append(checkbox, todoTitle, todoDescription, todoDueDate, todoPriority, deleteImage);
-    console.log("finished renderTodoItem");
-
     todoItem.addEventListener("click", () => fillEditForm(todo, todoItem));
 
     return todoItem;
@@ -233,10 +211,6 @@ function editTodo(todo, todoItem) {
     let priority = document.getElementById("edit-todo-priority").value;
 
     _projectManager.editTodo(todo, title, description, dueDate, priority);
-
-    // const dateSplit = todo.dueDate.split("-");
-    // todoText.textContent = `${todo.title}: ${todo.description} | Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}
-    //                             | Priority: ${todo.priority}`;
 
     todoItem.getElementsByClassName("item-title")[0].textContent = todo.title;
     todoItem.getElementsByClassName("item-description")[0].textContent = todo.description;
