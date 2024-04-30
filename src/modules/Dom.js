@@ -219,7 +219,7 @@ function editTodo(todo, todoItem) {
     todoItem.getElementsByClassName("item-due-date")[0].textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`
     todoItem.getElementsByClassName("item-priority")[0].textContent = `Priority: ${todo.priority}`;
 
-    highlightUrgency(todo, todoItem);
+    highlightUrgency(todo, todoItem.getElementsByClassName("item-due-date")[0]);
 }
 
 function fillEditForm(todo, todoItem) {
