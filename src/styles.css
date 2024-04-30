@@ -64,8 +64,10 @@ li > span {
     margin-right: auto;
 }
 
-li:hover {
-    border: solid gray 3px;
+.item-due-date {
+    display: flex;
+    height: 100%;
+    align-items: center;
 }
 
 .selected {
@@ -97,4 +99,8 @@ li > img:hover {
     background-color: transparent;
     text-decoration: line-through;
     color: gray;
+}
+
+li:hover {
+    border: solid gray 3px;
 }

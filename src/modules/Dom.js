@@ -119,7 +119,8 @@ function renderProjectTodos(project) {
         if (todo.isFinished) {
             todoItem.classList.add("finished");
         }
-        highlightUrgency(todo, todoItem);
+        highlightUrgency(todo, todoItem.getElementsByClassName("item-due-date")[0]);
+        // highlightUrgency(todo, todoItem);
         todoList.appendChild(todoItem);
     });
 
@@ -141,9 +142,11 @@ function buildTodoItem(project, todo) {
     todoDescription.textContent = todo.description;
     todoDescription.classList.add("item-description");
     const todoDueDate = document.createElement("div");
-    let dateSplit = todo.dueDate.split("-");
-    todoDueDate.textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`;
     todoDueDate.classList.add("item-due-date");
+    const todoDueDateInner = document.createElement("div");
+    let dateSplit = todo.dueDate.split("-");
+    todoDueDateInner.textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`;
+    todoDueDate.appendChild(todoDueDateInner);
     const todoPriority = document.createElement("div");
     todoPriority.textContent = `Priority: ${todo.priority}`;
     todoPriority.classList.add("item-priority");
