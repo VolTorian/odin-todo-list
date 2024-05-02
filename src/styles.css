@@ -47,9 +47,21 @@ li {
     align-items: center;
 }
 
+#todo-section-bar {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) 24px;
+    border: solid transparent 3px;
+    text-align: left;
+    gap: .5rem;
+}
+
+#todo-section-bar > div:first-child {
+    text-align: center;
+}
+
 #todo-list > li {
     display: grid;
-    grid-template-columns: min-content minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) min-content;
+    grid-template-columns: 80px minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) 24px;
     text-align: left;
     align-items: center;
     gap: .5rem;

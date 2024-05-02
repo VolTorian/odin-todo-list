@@ -114,6 +114,24 @@ function renderProjectTodos(project) {
     projectTitle.textContent = `${project.name}: ${project.description}`;
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "visible";
+
+    const todoSectionBar = document.createElement("div");
+    todoSectionBar.id = "todo-section-bar"
+    const finishedHead = document.createElement("div");
+    finishedHead.textContent = "Finished";
+    const titleHead = document.createElement("div");
+    titleHead.textContent = "Title";
+    const descriptionHead = document.createElement("div");
+    descriptionHead.textContent = "Description";
+    const dueDateHead = document.createElement("div");
+    dueDateHead.textContent = "Due Date";
+    const priorityHead = document.createElement("div");
+    priorityHead.textContent = "Priority";
+    todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
+    todoList.appendChild(todoSectionBar);
+
+    todoList.appendChild(document.createElement("hr"));
+
     project.todoList.forEach((todo) => {
         const todoItem = buildTodoItem(project, todo);
         if (todo.isFinished) {
