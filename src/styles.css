@@ -101,10 +101,12 @@ li > img:hover {
     border-bottom: solid lightgreen 3px;
 }
 
-.finished {
+.finished > div {
     background-color: transparent;
     text-decoration: line-through;
     color: gray;
+    border-top: solid transparent 3px;
+    border-bottom: solid transparent 3px;
 }
 
 li:hover {
