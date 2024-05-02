@@ -120,7 +120,6 @@ function renderProjectTodos(project) {
             todoItem.classList.add("finished");
         }
         highlightUrgency(todo, todoItem.getElementsByClassName("item-due-date")[0]);
-        // highlightUrgency(todo, todoItem);
         todoList.appendChild(todoItem);
     });
 

@@ -85,14 +85,20 @@ li > img:hover {
 
 .due {
     background-color: red;
+    border-top: solid red 3px;
+    border-bottom: solid red 3px;
 }
 
 .urgent {
     background-color: yellow;
+    border-top: solid yellow 3px;
+    border-bottom: solid yellow 3px;
 }
 
 .upcoming {
     background-color: lightgreen;
+    border-top: solid lightgreen 3px;
+    border-bottom: solid lightgreen 3px;
 }
 
 .finished {
@@ -103,4 +109,9 @@ li > img:hover {
 
 li:hover {
     border: solid gray 3px;
+}
+
+li:hover > div:nth-child(4) {
+    border-top: solid gray 3px;
+    border-bottom: solid gray 3px;
 }
