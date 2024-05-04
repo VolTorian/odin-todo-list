@@ -88,6 +88,7 @@ function createEditTodoDialog() {
 
 function createProjectListItem(project) {
     const projectItem = document.createElement("li");
+    projectList.appendChild(projectItem);
     highlightSelected(projectItem);
     projectItem.addEventListener("click", () => {
         renderProjectTodos(project)
@@ -102,8 +103,6 @@ function createProjectListItem(project) {
     deleteImage.src = deleteIcon;
     deleteImage.addEventListener("click", () => deleteProject(project, projectItem));
     projectItem.appendChild(deleteImage);
-    
-    projectList.appendChild(projectItem);
 }
 
 function renderInitialProjectList() {
@@ -251,12 +250,18 @@ function fillEditForm(todo, todoItem) {
 }
 
 function highlightSelected(selected) {
-    const projectListItems = document.querySelectorAll("#project-list li");
-    projectListItems.forEach((item) => {
-        item.classList.remove("selected");
-    })
-
+    const childNodes = selected.parentNode.querySelectorAll(":scope > *");
+    childNodes.forEach((child) => {
+        child.classList.remove("selected");
+    });
     selected.classList.add("selected");
+
+    // const projectListItems = document.querySelectorAll("#project-list li");
+    // projectListItems.forEach((item) => {
+    //     item.classList.remove("selected");
+    // })
+
+    // selected.classList.add("selected");
 }
 
 function toggleTodoFinished(todo) {
