@@ -114,20 +114,21 @@ function renderProjectTodos(project) {
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "visible";
 
-    const todoSectionBar = document.createElement("div");
-    todoSectionBar.id = "todo-section-bar"
-    const finishedHead = document.createElement("div");
-    finishedHead.textContent = "Finished";
-    const titleHead = document.createElement("div");
-    titleHead.textContent = "Title";
-    const descriptionHead = document.createElement("div");
-    descriptionHead.textContent = "Description";
-    const dueDateHead = document.createElement("div");
-    dueDateHead.textContent = "Due Date";
-    const priorityHead = document.createElement("div");
-    priorityHead.textContent = "Priority";
-    todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
-    todoList.appendChild(todoSectionBar);
+    // const todoSectionBar = document.createElement("div");
+    // todoSectionBar.id = "todo-section-bar"
+    // const finishedHead = document.createElement("div");
+    // finishedHead.textContent = "Finished";
+    // const titleHead = document.createElement("div");
+    // titleHead.textContent = "Title";
+    // const descriptionHead = document.createElement("div");
+    // descriptionHead.textContent = "Description";
+    // const dueDateHead = document.createElement("div");
+    // dueDateHead.textContent = "Due Date";
+    // const priorityHead = document.createElement("div");
+    // priorityHead.textContent = "Priority";
+    // todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
+    // todoList.appendChild(todoSectionBar);
+    todoList.appendChild(buildTodoSectionBar());
 
     todoList.appendChild(document.createElement("hr"));
 
@@ -141,6 +142,30 @@ function renderProjectTodos(project) {
     });
 
     document.getElementById("add-todo-form").onsubmit = () => addTodoToProject(project);
+}
+
+function buildTodoSectionBar() {
+    const todoSectionBar = document.createElement("div");
+    todoSectionBar.id = "todo-section-bar"
+    const finishedHead = document.createElement("div");
+    finishedHead.textContent = "Finished";
+    const titleHead = document.createElement("div");
+    titleHead.textContent = "Title";
+    const descriptionHead = document.createElement("div");
+    descriptionHead.textContent = "Description";
+    const dueDateHead = document.createElement("div");
+    dueDateHead.textContent = "Due Date";
+    const priorityHead = document.createElement("div");
+    priorityHead.textContent = "Priority";
+    todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
+
+    todoSectionBar.querySelectorAll(":scope > *").forEach((child) => {
+        child.addEventListener("click", () => {
+            highlightSelected(child);
+        });
+    });
+
+    return todoSectionBar;
 }
 
 function buildTodoItem(project, todo) {
