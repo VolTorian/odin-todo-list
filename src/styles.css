@@ -55,8 +55,20 @@ li {
     gap: .5rem;
 }
 
+#todo-section-bar > div {
+    height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+#todo-section-bar > div:hover {
+    background-color: whitesmoke;
+}
+
 #todo-section-bar > div:first-child {
-    text-align: center;
+    align-items: center;
 }
 
 #todo-list > li {
