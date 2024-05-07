@@ -89,6 +89,13 @@ class ProjectManager {
 
         localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
     }
+
+    sortTodosByDueDate(selectedProject) {
+        selectedProject.todoList.sort((todo1, todo2) => {
+            return todo1.dueDate - todo2.dueDate;
+        });
+        localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
+    }
 }
 
 export default ProjectManager;

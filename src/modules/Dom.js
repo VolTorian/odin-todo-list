@@ -128,7 +128,7 @@ function renderProjectTodos(project) {
     // priorityHead.textContent = "Priority";
     // todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
     // todoList.appendChild(todoSectionBar);
-    todoList.appendChild(buildTodoSectionBar());
+    todoList.appendChild(buildTodoSectionBar(project));
 
     todoList.appendChild(document.createElement("hr"));
 
@@ -144,7 +144,7 @@ function renderProjectTodos(project) {
     document.getElementById("add-todo-form").onsubmit = () => addTodoToProject(project);
 }
 
-function buildTodoSectionBar() {
+function buildTodoSectionBar(project) {
     const todoSectionBar = document.createElement("div");
     todoSectionBar.id = "todo-section-bar"
     const finishedHead = document.createElement("div");
@@ -155,6 +155,7 @@ function buildTodoSectionBar() {
     descriptionHead.textContent = "Description";
     const dueDateHead = document.createElement("div");
     dueDateHead.textContent = "Due Date";
+    dueDateHead.addEventListener("click", () => { sortTodoList(project) })
     const priorityHead = document.createElement("div");
     priorityHead.textContent = "Priority";
     todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
@@ -166,6 +167,11 @@ function buildTodoSectionBar() {
     });
 
     return todoSectionBar;
+}
+
+function sortTodoList(project) {
+    _projectManager.sortTodosByDueDate(project);
+    renderProjectTodos(project);
 }
 
 function buildTodoItem(project, todo) {
