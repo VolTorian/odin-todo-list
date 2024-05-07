@@ -183,8 +183,10 @@ function buildTodoItem(project, todo) {
     todoDescription.textContent = todo.description;
     todoDescription.classList.add("item-description");
     const todoDueDate = document.createElement("div");
-    let dateSplit = todo.dueDate.split("-");
-    todoDueDate.textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`;
+    // let dateSplit = todo.dueDate.split("-");
+    // todoDueDate.textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`;
+    let timezoneOffset = new Date().getTimezoneOffset() * -60000;
+    todoDueDate.textContent = format(todo.dueDate - timezoneOffset, "MMMM dd, yyyy");//for some reason having a positive offset and then adding wouldn't work?
     todoDueDate.classList.add("item-due-date");
     const todoPriority = document.createElement("div");
     todoPriority.textContent = `Priority: ${todo.priority}`;
@@ -220,7 +222,7 @@ function addTodoToProject(project) {
 
     let title = document.getElementById("input-todo-title").value;
     let description = document.getElementById("input-todo-description").value;
-    let dueDate = document.getElementById("input-todo-due").value;
+    let dueDate = document.getElementById("input-todo-due").valueAsDate;
     let priority = document.getElementById("input-todo-priority").value;
     document.getElementById("add-todo-form").reset();
 
@@ -249,15 +251,17 @@ function editTodo(todo, todoItem) {
     editTodoDialog.close();
     let title = document.getElementById("edit-todo-title").value;
     let description = document.getElementById("edit-todo-description").value;
-    let dueDate = document.getElementById("edit-todo-due").value;
+    let dueDate = document.getElementById("edit-todo-due").valueAsDate;
     let priority = document.getElementById("edit-todo-priority").value;
 
     _projectManager.editTodo(todo, title, description, dueDate, priority);
 
     todoItem.getElementsByClassName("item-title")[0].textContent = todo.title;
     todoItem.getElementsByClassName("item-description")[0].textContent = todo.description;
-    const dateSplit = todo.dueDate.split("-");
-    todoItem.getElementsByClassName("item-due-date")[0].textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`
+    // const dateSplit = todo.dueDate.split("-");
+    // todoItem.getElementsByClassName("item-due-date")[0].textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`
+    let timezoneOffset = new Date().getTimezoneOffset() * -60000;
+    todoItem.getElementsByClassName("item-due-date")[0].textContent = format(todo.dueDate - timezoneOffset, "MMMM dd, yyyy");
     todoItem.getElementsByClassName("item-priority")[0].textContent = `Priority: ${todo.priority}`;
 
     highlightUrgency(todo, todoItem.getElementsByClassName("item-due-date")[0]);
@@ -266,7 +270,7 @@ function editTodo(todo, todoItem) {
 function fillEditForm(todo, todoItem) {
     document.getElementById("edit-todo-title").value = todo.title;
     document.getElementById("edit-todo-description").value = todo.description;
-    document.getElementById("edit-todo-due").value = todo.dueDate;
+    document.getElementById("edit-todo-due").valueAsDate = todo.dueDate;
     document.getElementById("edit-todo-priority").value = todo.priority;
 
     document.getElementById("edit-todo-form").onsubmit = () => editTodo(todo, todoItem);

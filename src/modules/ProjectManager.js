@@ -7,6 +7,11 @@ class ProjectManager {
 
         if (localStorage.getItem(this.localStorageKey)) {
             this.projectList = JSON.parse(localStorage.getItem(this.localStorageKey));
+            this.projectList.forEach((project) => {
+                project.todoList.forEach((todo) => {
+                    todo.dueDate = new Date(todo.dueDate);
+                })
+            })
 
             console.log("retrieved from local storage");
         }
