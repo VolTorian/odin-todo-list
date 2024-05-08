@@ -114,22 +114,7 @@ function renderProjectTodos(project) {
     todoList.innerHTML = "";
     addTodoButton.style.visibility = "visible";
 
-    // const todoSectionBar = document.createElement("div");
-    // todoSectionBar.id = "todo-section-bar"
-    // const finishedHead = document.createElement("div");
-    // finishedHead.textContent = "Finished";
-    // const titleHead = document.createElement("div");
-    // titleHead.textContent = "Title";
-    // const descriptionHead = document.createElement("div");
-    // descriptionHead.textContent = "Description";
-    // const dueDateHead = document.createElement("div");
-    // dueDateHead.textContent = "Due Date";
-    // const priorityHead = document.createElement("div");
-    // priorityHead.textContent = "Priority";
-    // todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
-    // todoList.appendChild(todoSectionBar);
     todoList.appendChild(buildTodoSectionBar(project));
-
     todoList.appendChild(document.createElement("hr"));
 
     project.todoList.forEach((todo) => {
@@ -189,8 +174,6 @@ function buildTodoItem(project, todo) {
     todoDescription.textContent = todo.description;
     todoDescription.classList.add("item-description");
     const todoDueDate = document.createElement("div");
-    // let dateSplit = todo.dueDate.split("-");
-    // todoDueDate.textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`;
     let timezoneOffset = new Date().getTimezoneOffset() * -60000;
     todoDueDate.textContent = format(todo.dueDate - timezoneOffset, "MMMM dd, yyyy");//for some reason having a positive offset and then adding wouldn't work?
     todoDueDate.classList.add("item-due-date");
@@ -264,8 +247,6 @@ function editTodo(todo, todoItem) {
 
     todoItem.getElementsByClassName("item-title")[0].textContent = todo.title;
     todoItem.getElementsByClassName("item-description")[0].textContent = todo.description;
-    // const dateSplit = todo.dueDate.split("-");
-    // todoItem.getElementsByClassName("item-due-date")[0].textContent = `Due: ${format(new Date(dateSplit[0], dateSplit[1] - 1, dateSplit[2]), "MMMM dd, yyyy")}`
     let timezoneOffset = new Date().getTimezoneOffset() * -60000;
     todoItem.getElementsByClassName("item-due-date")[0].textContent = format(todo.dueDate - timezoneOffset, "MMMM dd, yyyy");
     todoItem.getElementsByClassName("item-priority")[0].textContent = `Priority: ${todo.priority}`;
@@ -290,13 +271,6 @@ function highlightSelected(selected) {
         child.classList.remove("selected");
     });
     selected.classList.add("selected");
-
-    // const projectListItems = document.querySelectorAll("#project-list li");
-    // projectListItems.forEach((item) => {
-    //     item.classList.remove("selected");
-    // })
-
-    // selected.classList.add("selected");
 }
 
 function toggleTodoFinished(todo) {
