@@ -8,7 +8,7 @@ const addProjectDialog = document.getElementById("add-project-dialog");
 const addTodoDialog = document.getElementById("add-todo-dialog");
 const editTodoDialog = document.getElementById("edit-todo-dialog");
 const projectList = document.getElementById("project-list");
-const todoList = document.getElementById("todo-list");
+const todoSection = document.getElementById("todo-section");
 const addProjectButton = document.getElementById("add-project-button")
 const addTodoButton = document.getElementById("add-todo-button");
 const projectTitle = document.getElementById("project-title");
@@ -91,7 +91,7 @@ function createProjectListItem(project) {
     projectList.appendChild(projectItem);
     highlightSelected(projectItem);
     projectItem.addEventListener("click", () => {
-        renderProjectTodos(project)
+        renderTodoSection(project)
         highlightSelected(projectItem);
     });
 
@@ -109,14 +109,23 @@ function renderInitialProjectList() {
     _projectManager.projectList.forEach((project) => createProjectListItem(project));
 }
 
-function renderProjectTodos(project) {
+function renderTodoSection(project) {
     projectTitle.textContent = `${project.name}: ${project.description}`;
-    todoList.innerHTML = "";
+    todoSection.innerHTML = "";
     addTodoButton.style.visibility = "visible";
 
-    todoList.appendChild(buildTodoSectionBar(project));
-    todoList.appendChild(document.createElement("hr"));
+    todoSection.appendChild(buildTodoSectionBar(project));
+    todoSection.appendChild(document.createElement("hr"));
 
+    const todoList = document.createElement("ul");
+    todoList.id = "todo-list";
+    todoSection.appendChild(todoList);
+    renderProjectTodos(project);
+}
+
+function renderProjectTodos(project) {
+    const todoList = document.getElementById("todo-list");
+    todoList.innerHTML = "";
     project.todoList.forEach((todo) => {
         const todoItem = buildTodoItem(project, todo);
         if (todo.isFinished) {
@@ -224,7 +233,7 @@ function deleteProject(project, projectListItem) {
     _projectManager.deleteProject(project);
     projectListItem.remove();
 
-    todoList.innerHTML = "Select a project on the left to get started";
+    todoSection.innerHTML = "Select a project on the left to get started";
     addTodoButton.style.visibility = "hidden";
     projectTitle.textContent = "";
 }
@@ -321,7 +330,7 @@ function renderPage() {
     closeEditTodoDialog.addEventListener("click", () => editTodoDialog.close());
 
     addTodoButton.style.visibility = "hidden";
-    todoList.innerHTML = "Select a project on the left to get started";
+    todoSection.innerHTML = "Select a project on the left to get started";
 
     const projectListItems = document.querySelectorAll("#project-list li");
     projectListItems.forEach((item) => {

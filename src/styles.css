@@ -71,6 +71,10 @@ li {
     align-items: center;
 }
 
+#todo-list {
+    padding: 0;
+}
+
 #todo-list > li {
     display: grid;
     grid-template-columns: 80px minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) 24px;
