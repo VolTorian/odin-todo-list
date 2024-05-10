@@ -92,7 +92,13 @@ class ProjectManager {
 
     sortTodosByDueDate(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            return todo1.dueDate - todo2.dueDate;
+            let difference = todo1.dueDate - todo2.dueDate;
+            if (difference !== 0) {
+                return difference;
+            }
+            else {
+                return todo2.priority - todo1.priority; //sorts by highest priority if due dates are the same
+            }
         });
         localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
     }
