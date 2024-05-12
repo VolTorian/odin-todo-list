@@ -149,10 +149,10 @@ function buildTodoSectionBar(project) {
     descriptionHead.textContent = "Description";
     const dueDateHead = document.createElement("div");
     dueDateHead.textContent = "Due Date";
-    dueDateHead.addEventListener("click", () => { sortTodoList(project, "dueDate") });
+    // dueDateHead.addEventListener("click", () => { sortTodoList(project, "dueDate") });
     const priorityHead = document.createElement("div");
     priorityHead.textContent = "Priority";
-    priorityHead.addEventListener("click", () => { sortTodoList(project, "priority") });
+    // priorityHead.addEventListener("click", () => { sortTodoList(project, "priority") });
     todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
 
     todoSectionBar.querySelectorAll(":scope > *").forEach((child) => {
@@ -162,11 +162,15 @@ function buildTodoSectionBar(project) {
         });
     });
 
+    dueDateHead.addEventListener("click", () => { sortTodoList(project, "dueDate") });
+    priorityHead.addEventListener("click", () => { sortTodoList(project, "priority") });
+
     return todoSectionBar;
 }
 
 function sortTodoList(project, property) {
-    _projectManager.sortTodos(project, property);
+    let sortOrder = document.querySelector("#todo-section-bar > .selected").classList[1];
+    _projectManager.sortTodos(project, property, sortOrder);
     renderProjectTodos(project);
 }
 

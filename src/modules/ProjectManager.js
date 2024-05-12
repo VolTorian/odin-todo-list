@@ -90,7 +90,7 @@ class ProjectManager {
         localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
     }
 
-    sortTodos(selectedProject, property) {
+    sortTodos(selectedProject, property, sortOrder) {
         switch (property) {
             case "dueDate":
                 this.sortTodosByDueDate(selectedProject);
@@ -99,6 +99,12 @@ class ProjectManager {
                 this.sortTodosByPriority(selectedProject);
                 break;
         }
+
+        if (sortOrder === "descending") {
+            selectedProject.todoList.reverse();
+        }
+
+        localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
     }
 
     sortTodosByDueDate(selectedProject) {
@@ -111,7 +117,6 @@ class ProjectManager {
                 return todo2.priority - todo1.priority; //sorts by highest priority if due dates are the same
             }
         });
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
     }
 
     sortTodosByPriority(selectedProject) {
@@ -124,7 +129,6 @@ class ProjectManager {
                 return todo1.dueDate - todo2.dueDate;
             }
         });
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
     }
 }
 
