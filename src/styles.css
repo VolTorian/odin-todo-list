@@ -61,6 +61,7 @@ li {
     flex-direction: column;
     justify-content: center;
     box-sizing: border-box;
+    border: solid transparent 3px;
 }
 
 #todo-section-bar > div:hover {
@@ -144,4 +145,12 @@ li:hover {
 li:hover > div:nth-child(4) {
     border-top: solid gray 3px;
     border-bottom: solid gray 3px;
+}
+
+#todo-section-bar > .ascending {
+    border-bottom: solid gray 3px;
+}
+
+#todo-section-bar > .descending {
+    border-top: solid gray 3px;
 }

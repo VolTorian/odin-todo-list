@@ -156,8 +156,9 @@ function buildTodoSectionBar(project) {
     todoSectionBar.append(finishedHead, titleHead, descriptionHead, dueDateHead, priorityHead);
 
     todoSectionBar.querySelectorAll(":scope > *").forEach((child) => {
-        child.addEventListener("click", () => {
+        child.addEventListener("click", (e) => {
             highlightSelected(child);
+            toggleSortOrder(e);
         });
     });
 
@@ -281,6 +282,24 @@ function highlightSelected(selected) {
         child.classList.remove("selected");
     });
     selected.classList.add("selected");
+    childNodes.forEach((child) => {
+        if (!child.classList.contains("selected")) {
+            child.classList.remove("ascending");
+            child.classList.remove("descending");
+        }
+    })
+}
+
+function toggleSortOrder(e) {
+    const selected = e.target;
+    if (!selected.classList.contains("ascending")) {
+        selected.classList.add("ascending");
+        selected.classList.remove("descending");
+    }
+    else {
+        selected.classList.add("descending");
+        selected.classList.remove("ascending");
+    }
 }
 
 function toggleTodoFinished(todo) {
