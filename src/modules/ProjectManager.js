@@ -92,6 +92,15 @@ class ProjectManager {
 
     sortTodos(selectedProject, property, sortOrder) {
         switch (property) {
+            case "isFinished":
+                this.sortTodosByFinished(selectedProject);
+                break;
+            case "title":
+                this.sortTodosByTitle(selectedProject);
+                break;
+            case "description":
+                this.sortTodosByDescription(selectedProject);
+                break;
             case "dueDate":
                 this.sortTodosByDueDate(selectedProject);
                 break;
@@ -105,6 +114,36 @@ class ProjectManager {
         }
 
         localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
+    }
+
+    sortTodosByFinished(selectedProject) {
+        selectedProject.todoList.sort((todo1, todo2) => {
+            return todo1.isFinished - todo2.isFinished;
+        });
+    }
+
+    sortTodosByTitle(selectedProject) {
+        selectedProject.todoList.sort((todo1, todo2) => {
+            if (todo1.title < todo2.title) {
+                return -1;
+            }
+            if (todo2.title > todo2.title) {
+                return 1;
+            }
+            return 0;
+        });
+    }
+
+    sortTodosByDescription(selectedProject) {
+        selectedProject.todoList.sort((todo1, todo2) => {
+            if (todo1.description < todo2.description) {
+                return -1;
+            }
+            if (todo2.description > todo2.description) {
+                return 1;
+            }
+            return 0;
+        });
     }
 
     sortTodosByDueDate(selectedProject) {
