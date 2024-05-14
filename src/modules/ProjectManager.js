@@ -124,25 +124,13 @@ class ProjectManager {
 
     sortTodosByTitle(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            if (todo1.title < todo2.title) {
-                return -1;
-            }
-            if (todo2.title > todo2.title) {
-                return 1;
-            }
-            return 0;
+            return todo1.title.localeCompare(todo2.title);
         });
     }
 
     sortTodosByDescription(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            if (todo1.description < todo2.description) {
-                return -1;
-            }
-            if (todo2.description > todo2.description) {
-                return 1;
-            }
-            return 0;
+            return todo1.description.localeCompare(todo2.description);
         });
     }
 
