@@ -136,25 +136,13 @@ class ProjectManager {
 
     sortTodosByDueDate(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            let difference = todo1.dueDate - todo2.dueDate;
-            if (difference !== 0) {
-                return difference;
-            }
-            else {
-                return todo2.priority - todo1.priority; //sorts by highest priority if due dates are the same
-            }
+            return (todo1.dueDate - todo2.dueDate) || (todo2.priority - todo1.priority);
         });
     }
 
     sortTodosByPriority(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            let difference = todo2.priority - todo1.priority;
-            if (difference !== 0) {
-                return difference;
-            }
-            else {
-                return todo1.dueDate - todo2.dueDate;
-            }
+            return (todo2.priority - todo1.priority) || (todo1.dueDate - todo2.dueDate);
         });
     }
 }
