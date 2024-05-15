@@ -9,7 +9,7 @@ class Todo {
         this.priority = priority;
         this.isFinished = isFinished;
 
-        console.log(`Test, todo ID: ${this.id}`);
+        // console.log(`Test, creating Todo with ID: ${this.id}`);
     }
 }
 

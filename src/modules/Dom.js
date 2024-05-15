@@ -222,7 +222,6 @@ function addProject() {
 
 function addTodoToProject(project) {
     event.preventDefault();
-    console.log(`Testing submitting new todo, project id: ${project.id}`);
     addTodoDialog.close();
 
     let title = document.getElementById("input-todo-title").value;

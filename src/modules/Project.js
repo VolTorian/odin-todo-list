@@ -7,7 +7,7 @@ class Project {
         this.description = description;
         this.todoList = todoList;
 
-        console.log(`Test, project ID: ${this.id}`);
+        // console.log(`Test, creating Project with ID: ${this.id}`);
     }
 
     addTodo(todo) {

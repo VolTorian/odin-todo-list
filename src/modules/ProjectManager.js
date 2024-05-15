@@ -25,9 +25,6 @@ class ProjectManager {
         this.projectList.push(new Project(name, description, todoList));
 
         localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
-
-        console.log("Test, newly added project:");
-        console.log(this.projectList[this.projectList.length - 1]);
     }
 
     addTodoToProject(projectId, title, description, dueDate, priority, isFinished = false) {
@@ -41,9 +38,6 @@ class ProjectManager {
         selectedProject.todoList.push(new Todo(title, description, dueDate, priority, isFinished))
 
         localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
-
-        console.log("Test, todo added to project:");
-        console.log(selectedProject.todoList);
     }
 
     deleteProject(selectedProject) {
@@ -57,9 +51,6 @@ class ProjectManager {
         this.projectList.splice(index, 1);
 
         localStorage.setItem(this.localStorageKey, JSON.stringify(this.projectList));
-
-        console.log(`Testing, the project list after removing project ${selectedProject.id}`);
-        console.log(this.projectList);
     }
 
     deleteTodo(selectedProject, selectedTodo) {
