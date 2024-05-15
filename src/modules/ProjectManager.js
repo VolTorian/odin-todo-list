@@ -118,31 +118,51 @@ class ProjectManager {
 
     sortTodosByFinished(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            return todo1.isFinished - todo2.isFinished;
+            return (todo1.isFinished - todo2.isFinished) ||
+                (todo1.dueDate - todo2.dueDate) ||
+                (todo2.priority - todo1.priority) ||
+                (todo1.title.localeCompare(todo2.title)) ||
+                (todo1.description.localeCompare(todo2.description));
         });
     }
 
     sortTodosByTitle(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            return todo1.title.localeCompare(todo2.title);
+            return (todo1.title.localeCompare(todo2.title)) ||
+                (todo1.isFinished - todo2.isFinished) ||
+                (todo1.dueDate - todo2.dueDate) ||
+                (todo2.priority - todo1.priority) ||
+                (todo1.description.localeCompare(todo2.description));
         });
     }
 
     sortTodosByDescription(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            return todo1.description.localeCompare(todo2.description);
+            return (todo1.description.localeCompare(todo2.description)) ||
+                (todo1.isFinished - todo2.isFinished) ||
+                (todo1.dueDate - todo2.dueDate) ||
+                (todo2.priority - todo1.priority) ||
+                (todo1.title.localeCompare(todo2.title));
         });
     }
 
     sortTodosByDueDate(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            return (todo1.dueDate - todo2.dueDate) || (todo2.priority - todo1.priority);
+            return (todo1.dueDate - todo2.dueDate) ||
+                (todo1.isFinished - todo2.isFinished) ||
+                (todo2.priority - todo1.priority) ||
+                (todo1.title.localeCompare(todo2.title)) ||
+                (todo1.description.localeCompare(todo2.description));
         });
     }
 
     sortTodosByPriority(selectedProject) {
         selectedProject.todoList.sort((todo1, todo2) => {
-            return (todo2.priority - todo1.priority) || (todo1.dueDate - todo2.dueDate);
+            return (todo2.priority - todo1.priority) ||
+                (todo1.isFinished - todo2.isFinished) ||
+                (todo1.dueDate - todo2.dueDate) ||
+                (todo1.title.localeCompare(todo2.title)) ||
+                (todo1.description.localeCompare(todo2.description));
         });
     }
 }
