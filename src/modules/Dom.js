@@ -12,6 +12,7 @@ const todoSection = document.getElementById("todo-section");
 const addProjectButton = document.getElementById("add-project-button")
 const addTodoButton = document.getElementById("add-todo-button");
 const projectTitle = document.getElementById("project-title");
+let currentProject;
 
 function createAddProjectDialog() {
     addProjectDialog.innerHTML = `
@@ -110,6 +111,7 @@ function renderInitialProjectList() {
 }
 
 function renderTodoSection(project) {
+    currentProject = project;
     projectTitle.textContent = `${project.name}: ${project.description}`;
     todoSection.innerHTML = "";
     addTodoButton.style.visibility = "visible";
@@ -239,9 +241,11 @@ function deleteProject(project, projectListItem) {
     _projectManager.deleteProject(project);
     projectListItem.remove();
 
-    todoSection.innerHTML = "Select a project on the left to get started";
-    addTodoButton.style.visibility = "hidden";
-    projectTitle.textContent = "";
+    if (currentProject === project) {
+        todoSection.innerHTML = "Select a project on the left to get started";
+        addTodoButton.style.visibility = "hidden";
+        projectTitle.textContent = "";
+    }
 }
 
 function deleteTodo(project, todo, todoListItem) {
