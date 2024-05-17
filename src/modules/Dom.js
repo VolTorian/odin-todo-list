@@ -217,7 +217,7 @@ function addProject() {
 
     let newProject = _projectManager.projectList[_projectManager.projectList.length - 1];
     createProjectListItem(newProject);
-    renderProjectTodos(newProject);
+    renderTodoSection(newProject);
 }
 
 function addTodoToProject(project) {
